@@ -119,6 +119,7 @@ public class MainActivity extends Activity {
 				if (scanResult.postalCode != null) {
 					resultDisplayStr += "Postal Code: " + scanResult.postalCode + "\n";
 				}
+				
 				creditcardinfo = resultDisplayStr;
 				nfcAdapter.disableReaderMode(this);
 				isNFC_On.setText("NFC is On, tap to send Credit Card info");
@@ -145,9 +146,13 @@ public class MainActivity extends Activity {
 	}
 
 	private NdefMessage getNoteAsNdef(String UserId) {
-        byte[] textBytes = UserId.getBytes();
-        NdefRecord textRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, "text/plain".getBytes(),
-                new byte[] {}, textBytes);
+        byte[] textBytes = new byte[UserId.length() + 3];
+        textBytes[0] = 0x02;
+        textBytes[1] = 'e';
+        textBytes[2] = 'n';
+        System.arraycopy(UserId.getBytes(), 0 , textBytes, 3, UserId.length());
+        NdefRecord textRecord = new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT,
+                new byte[0], textBytes);
         return new NdefMessage(new NdefRecord[] {
             textRecord
         });
