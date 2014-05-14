@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">reader</string>
+    <string name="hello_world">No Credit Card Info has been scanned</string>
+    <string name="scanbutton">Press to Scan Card</string>
+    <string name="servicedesc">Description of service</string>
+    <string name="aiddescription">AID description</string>
+    <string name="nfcbool">NFC is off, please scan Credit Card</string>
+
+</resources>
